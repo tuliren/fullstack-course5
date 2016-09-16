@@ -12,7 +12,7 @@
   <div class="container" ng-controller="LunchCheckController">
     <h1>Lunch Checker</h1>
 
-    <div class="form-group">
+    <div class="form-group has-{{validation}}">
       <input id="lunch-menu" type="text" ng-model="lunchContent"
         placeholder="list comma separated dishes you usually have for lunch"
         class="form-control">
@@ -25,8 +25,8 @@
       </button>
     </div>
 
-    <div class="form-group message">
-      {{message}}
+    <div class="form-group message has-{{validation}}">
+      <label class="control-label">{{message}}</label>
     </div>
   </div>
   <script src="scripts/angular.min.js"></script>
