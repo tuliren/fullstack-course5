@@ -15,13 +15,20 @@ function NarrowItDownController (service) {
   ctrl.error = '';
 
   ctrl.searchMenu = function () {
-    var promise = service.getMatchedMenuItems(ctrl.searchTerm.toLowerCase());
+    var promise = service.getMatchedMenuItems();
+    var searchTerm = ctrl.searchTerm.toLowerCase();
 
-    promise.then(function (response) {
-      ctrl.found = response;
+    promise.then(function (menuItems) {
+      ctrl.found = [];
+      for (var i = 0; i < menuItems.length; i++) {
+        if (menuItems[i].description.toLowerCase().indexOf(searchTerm) !== -1) {
+          ctrl.found.push(menuItems[i]);
+        }
+      }
     }).catch(function (error) {
       ctrl.found = [];
       ctrl.error = error.statusText;
+      console.log(error);
     });
   };
 }
@@ -30,21 +37,13 @@ MenuSearchService.$inject = ['$http', 'ApiBasePath'];
 function MenuSearchService ($http, apiBasePath) {
   var service = this;
 
-  service.getMatchedMenuItems = function (searchTerm) {
-    return $http({
+  service.getMatchedMenuItems = function () {
+    var resonse = $http({
       method: "GET",
       url: apiBasePath
-    }).then(function (result) {
-      var foundItems = [];
-      var menuItems = result.data.menu_items;
-
-      for (var i = 0; i < menuItems.length; i++) {
-        if (menuItems[i].description.toLowerCase().indexOf(searchTerm) !== -1) {
-          foundItems.push(menuItems[i]);
-        }
-      }
-      return foundItems;
     });
+
+    return responese.data.menu_items;
   };
 }
 
