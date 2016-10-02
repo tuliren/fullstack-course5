@@ -12,9 +12,17 @@ function NarrowItDownController (service) {
 
   ctrl.searchTerm = '';
   ctrl.found = [];
+  ctrl.error = '';
 
-  ctrl.search = function () {
-    ctrl.found = service.getMatchedMenuItems(ctrl.searchTerm.toLowerCase());
+  ctrl.searchMenu = function () {
+    var promise = service.getMatchedMenuItems(ctrl.searchTerm.toLowerCase());
+
+    promise.then(function (response) {
+      ctrl.found = response;
+    }).catch(function (error) {
+      ctrl.found = [];
+      ctrl.error = error.statusText;
+    });
   };
 }
 
@@ -23,7 +31,7 @@ function MenuSearchService ($http, apiBasePath) {
   var service = this;
 
   service.getMatchedMenuItems = function (searchTerm) {
-    var response = $http({
+    return $http({
       method: "GET",
       url: apiBasePath
     }).then(function (result) {
@@ -35,11 +43,8 @@ function MenuSearchService ($http, apiBasePath) {
           foundItems.push(menuItems[i]);
         }
       }
-
       return foundItems;
     });
-
-    return response;
   };
 }
 
