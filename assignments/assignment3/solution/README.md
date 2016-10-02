@@ -1,4 +1,4 @@
-Solution for Assignment 2
+Solution for Assignment 3
 ===
 
-URL: https://tuliren.github.io/fullstack-course5/assignments/assignment2/solution/
+URL: https://tuliren.github.io/fullstack-course5/assignments/assignment3/solution/
