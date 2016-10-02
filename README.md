@@ -11,3 +11,7 @@ This repository contains the source code for the [Single Page Web Applications w
 ### Week 2
 - [Solution](https://github.com/tuliren/fullstack-course5/tree/master/assignments/assignment2/solution)
 - [Application](https://tuliren.github.io/fullstack-course5/assignments/assignment2/solution/)
+
+### Week 3
+- [Solution](https://github.com/tuliren/fullstack-course5/tree/master/assignments/assignment3/solution)
+- [Application](https://tuliren.github.io/fullstack-course5/assignments/assignment3/solution/)
