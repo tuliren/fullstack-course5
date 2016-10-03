@@ -25,9 +25,9 @@ function NarrowItDownController (service) {
     var searchTerm = ctrl.searchTerm.toLowerCase();
 
     service.getAllMenuItems().then(function (response) {
+      ctrl.found = [];
       ctrl.error = '';
       var menuItems = response.data.menu_items;
-      ctrl.found = [];
 
       for (var i = 0; i < menuItems.length; i++) {
         if (menuItems[i].description.toLowerCase().indexOf(searchTerm) !== -1) {
