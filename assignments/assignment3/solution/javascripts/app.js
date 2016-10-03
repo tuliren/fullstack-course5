@@ -17,7 +17,6 @@ function NarrowItDownController (service) {
 
   ctrl.searchMenu = function () {
     if (!ctrl.searchTerm.trim() || ctrl.searchTerm.length === 0) {
-      console.log(searchTerm);
       ctrl.found = [];
       ctrl.error = '';
       return;
@@ -41,6 +40,10 @@ function NarrowItDownController (service) {
       console.log(error);
     });
   };
+
+  ctrl.removeItem = function (index) {
+    ctrl.found.splice(index, 1);
+  };
 }
 
 MenuFetchService.$inject = ['$http', 'ApiBasePath'];
@@ -60,12 +63,19 @@ function FoundItems () {
     templateUrl: 'foundItems.html',
     restrict: 'E',
     scope: {
-      items: '<foundItems'
-      // onRemove: '&'
-    }
+      items: '<',
+      onRemove: '&'
+    },
+    controller: FoundItemsController,
+    controllerAs: 'foundItemsCtrl',
+    bindToController: true
   };
 
   return ddo;
+}
+
+function FoundItemsController () {
+  var ctrl = this;
 }
 
 })();
