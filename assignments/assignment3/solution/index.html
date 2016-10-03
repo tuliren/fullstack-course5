@@ -21,7 +21,11 @@
       <items-loader-indicator></items-loader-indicator>
 
       <!-- found-items should be implemented as a component -->
-      <found-items found-items="...." on-remove="...."></found-items>
+      <found-items found-items="narrowDown.found" on-remove="...."></found-items>
+
+      <div class="form-group has-error">
+        <span class="help-block">{{narrowDown.error}}</span>
+      </div>
     </div>
 
     <script src="javascripts/angular.min.js"></script>
