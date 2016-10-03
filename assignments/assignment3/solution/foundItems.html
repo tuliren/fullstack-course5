@@ -7,11 +7,12 @@
       <th>Description</th>
       <th>Small</th>
       <th>Large</th>
+      <th>Remove</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-if="items.length === 0">
-      <td style="text-align: center;" colspan="6">Nothing Searched or Found</td>
+      <td style="text-align: center;" colspan="7">Nothing Searched or Found</td>
     </tr>
     <tr ng-if="items.length !== 0" ng-repeat="item in items">
       <td>{{item.id}}</th>
@@ -20,6 +21,7 @@
       <td>{{item.description}}</th>
       <td>{{item.price_small ? (item.price_small | currency : '$' : 2) : 'NA'}}</th>
       <td>{{item.price_large ? (item.price_large | currency : '$' : 2) : 'NA'}}</th>
+      <td><button class="btn btn-xs btn-danger">Don't want this one!</button></td>
     </tr>
   </tbody>
 </table>
