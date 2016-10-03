@@ -3,11 +3,11 @@
 
 angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
-.service('MenuSearchService', MenuSearchService)
+.service('MenuFetchService', MenuFetchService)
 .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com/menu_items.json")
 .directive('foundItems', FoundItems);
 
-NarrowItDownController.$inject = ['MenuSearchService'];
+NarrowItDownController.$inject = ['MenuFetchService'];
 function NarrowItDownController (service) {
   var ctrl = this;
 
@@ -16,14 +16,16 @@ function NarrowItDownController (service) {
   ctrl.error = '';
 
   ctrl.searchMenu = function () {
-    var promise = service.getMatchedMenuItems();
-    var searchTerm = ctrl.searchTerm.toLowerCase();
-    if (searchTerm === '') {
+    if (!ctrl.searchTerm.trim() || ctrl.searchTerm.length === 0) {
+      console.log(searchTerm);
       ctrl.found = [];
+      ctrl.error = '';
       return;
     }
 
-    promise.then(function (response) {
+    var searchTerm = ctrl.searchTerm.toLowerCase();
+
+    service.getAllMenuItems().then(function (response) {
       ctrl.error = '';
       var menuItems = response.data.menu_items;
       ctrl.found = [];
@@ -41,11 +43,11 @@ function NarrowItDownController (service) {
   };
 }
 
-MenuSearchService.$inject = ['$http', 'ApiBasePath'];
-function MenuSearchService ($http, apiBasePath) {
+MenuFetchService.$inject = ['$http', 'ApiBasePath'];
+function MenuFetchService ($http, apiBasePath) {
   var service = this;
 
-  service.getMatchedMenuItems = function () {
+  service.getAllMenuItems = function (searchTerm) {
     return $http({
       method: "GET",
       url: apiBasePath

@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Short</th>
+      <th>Code</th>
       <th>Name</th>
       <th>Description</th>
       <th>Small</th>
@@ -15,7 +15,7 @@
     </tr>
     <tr ng-if="items.length !== 0" ng-repeat="item in items">
       <td>{{item.id}}</th>
-      <td>{{tiem.short_name}}</td>
+      <td>{{item.short_name}}</td>
       <td>{{item.name}}</th>
       <td>{{item.description}}</th>
       <td>{{item.price_small ? (item.price_small | currency : '$' : 2) : 'NA'}}</th>
